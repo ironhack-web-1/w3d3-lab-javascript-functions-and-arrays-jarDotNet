@@ -272,7 +272,7 @@ describe('Count repetition', () => {
   });
 });
 
-describe('Bonus Quest - greatestProduct', () => {
+describe('Bonus Quest 1 - greatestProduct', () => {
   it('should declare a function named greatestProduct', () => {
     expect(typeof greatestProduct).toBe('function');
   });
@@ -327,5 +327,33 @@ describe('Bonus Quest - greatestProduct', () => {
       [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
     ];
     expect(greatestProduct(matrix)).toBe(16);
+  });
+});
+
+describe('Bonus Quest 2 - greatestProductOfDiagonals', () => {
+  it('should declare a function named greatestProductOfDiagonals', () => {
+    expect(typeof greatestProductOfDiagonals).toBe('function');
+  });
+
+  it('should return 1800 when max product is (20 * 3 * 6 * 5)', () => {
+    let matrix = [
+      [ 1,  2, 3, 4, 5],
+      [ 1, 20, 3, 4, 5],
+      [ 1, 20, 3, 4, 5],
+      [ 1, 20, 3, 6, 5],
+      [ 1,  4, 3, 4, 5]
+    ];
+    expect(greatestProductOfDiagonals(matrix)).toBe(1800);
+  });
+
+  it('should return 3200 when max product is (20 * 8 * 4 * 5)', () => {
+    let matrix = [
+      [ 1,  2, 3, 4, 5],
+      [ 1, 20, 3, 4, 5],
+      [ 1, 20, 8, 4, 5],
+      [ 1, 20, 3, 2, 5],
+      [ 1,  4, 3, 4, 5]
+    ];
+    expect(greatestProductOfDiagonals(matrix)).toBe(3200);
   });
 });

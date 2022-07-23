@@ -1,24 +1,79 @@
 // Iteration #1: Find the maximum
-function maxOfTwoNumbers() {}
+function maxOfTwoNumbers(num1, num2) {
+  if (num1 >= num2) 
+    return num1;
+  else
+    return num2;
+}
 
 
 
 // Iteration #2: Find longest word
 const words = ['mystery', 'brother', 'aviator', 'crocodile', 'pearl', 'orchard', 'crackpot'];
 
-function findLongestWord() {}
+function findLongestWord(arrayOfWords) {
+
+  if (arrayOfWords === null || arrayOfWords.length === 0)
+    return null;
+
+  let longestWord = "";
+
+  arrayOfWords.forEach(word => {
+    if (word.length > longestWord.length)
+      longestWord = word;
+  }); 
+  
+  return longestWord;
+}
 
 
 
 // Iteration #3: Calculate the sum
 const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
 
-function sumNumbers() {}
+function sumNumbers(arrayOfNumbers) {
+  
+  let sum = 0;
+
+  if (arrayOfNumbers !== null && arrayOfNumbers.length !== 0)
+  {
+    arrayOfNumbers.forEach(num => sum += num); 
+  }
+  
+  return sum;
+}
 
 
 
-// Iteration #3.1 Bonus:
-function sum() {}
+// Iteration #3.1 Bonus: A generic sum() function
+function sum(arrayOfData) {
+  
+  if (arrayOfData === null || arrayOfData.length === 0)
+    return 0;
+    
+  let sum = 0;
+
+  arrayOfData.forEach(data => {
+    switch (typeof data) {
+      case 'number':
+        sum += data;
+        break;
+
+      case 'string':
+        sum += data.length;
+        break;
+
+      case 'boolean':
+        sum += Number(data);
+        break;
+    
+      default:
+        throw new Error("Unsupported data type sir or ma'am");
+    }
+  }); 
+
+  return sum;
+}
 
 
 
@@ -26,16 +81,42 @@ function sum() {}
 // Level 1: Array of numbers
 const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
 
-function averageNumbers() {}
+function averageNumbers(arrayOfNumbers) {
+
+  if (arrayOfNumbers === null || arrayOfNumbers.length === 0)
+    return null;
+
+  let sum = sumNumbers(arrayOfNumbers);
+
+  return sum / arrayOfNumbers.length;
+}
 
 
 // Level 2: Array of strings
 const wordsArr = ['seat', 'correspond', 'linen', 'motif', 'hole', 'smell', 'smart', 'chaos', 'fuel', 'palace'];
 
-function averageWordLength() { }
+function averageWordLength(arrayOfWords) { 
+
+  if (arrayOfWords === null || arrayOfWords.length === 0)
+    return null;
+
+  let sum = 0;
+
+  arrayOfWords.forEach(word => sum += word.length); 
+  
+  return sum / arrayOfWords.length;
+}
 
 // Bonus - Iteration #4.1
-function avg() {}
+function avg(arrayOfData) {
+
+  if (arrayOfData === null || arrayOfData.length === 0)
+    return null;
+
+  let total = sum(arrayOfData);
+
+  return total / arrayOfData.length;
+}
 
 // Iteration #5: Unique arrays
 const wordsUnique = [
@@ -52,14 +133,33 @@ const wordsUnique = [
   'bring'
 ];
 
-function uniquifyArray() {}
+function uniquifyArray(arrayOfWords) {
+
+  if (arrayOfWords === null || arrayOfWords.length === 0)
+    return null;
+
+  let newArray = [];
+
+  arrayOfWords.forEach(word => {
+    if (!newArray.includes(word))
+      newArray.push(word);
+  }); 
+
+  return newArray;
+}
 
 
 
 // Iteration #6: Find elements
 const wordsFind = ['machine', 'subset', 'trouble', 'starting', 'matter', 'eating', 'truth', 'disobedience'];
 
-function doesWordExist() {}
+function doesWordExist(arrayOfWords, wordToSeach) {
+
+  if (arrayOfWords === null || arrayOfWords.length === 0)
+    return null;
+
+  return arrayOfWords.includes(wordToSeach);
+}
 
 
 
@@ -78,11 +178,24 @@ const wordsCount = [
   'matter'
 ];
 
-function howManyTimes() {}
+function howManyTimes(arrayOfWords, wordToSeach) {
+
+  let count = 0;
+
+  if (arrayOfWords !== null && arrayOfWords.length !== 0)
+  {
+    arrayOfWords.forEach(word => {
+      if (word === wordToSeach)
+        count++;
+    }); 
+  }
+
+  return count;
+}
 
 
 
-// Iteration #8: Bonus
+// Iteration #8.1 Bonus: Product of adjacent numbers
 const matrix = [
   [8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8],
   [49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0],
@@ -106,7 +219,104 @@ const matrix = [
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
 
-function greatestProduct() {}
+function greatestProduct(matrix) {
+
+  let maxProduct = 0;
+
+  for (let x = 0; x < matrix.length; x++) {
+
+    let row = matrix[x];
+
+    for (let y = 0; y < row.length; y++) {
+
+      let rowProduct = getRowFourAdjacentNumbersProduct(row, x, y);
+      if (rowProduct > maxProduct)
+        maxProduct = rowProduct;
+
+      let columnProduct = getColumnFourAdjacentNumbersProduct(matrix, x, y);
+      if (columnProduct > maxProduct)
+        maxProduct = columnProduct;
+    }
+  }
+
+  return maxProduct;
+}
+
+function getRowFourAdjacentNumbersProduct(row, x, y) {
+
+  return row[y] * row[y+1] * row[y+2] * row[y+3];
+}
+
+function getColumnFourAdjacentNumbersProduct(matrix, x, y) {
+
+  let value = matrix[x][y];
+
+  if (matrix.length > x+1)
+    value *= matrix[x+1][y];
+
+  if (matrix.length > x+2)
+    value *= matrix[x+2][y];
+
+  if (matrix.length > x+3)
+    value *= matrix[x+3][y];
+
+  return value;
+}
+
+
+
+// Iteration #8.1 Bonus: Product of diagonals
+function greatestProductOfDiagonals(matrix) {
+
+  let maxProduct = 0;
+
+  for (let x = 0; x < matrix.length; x++) {
+    for (let y = 0; y < matrix[0].length; y++) {
+
+      let rowProduct = getDiagonalFourAdjacentNumbersProduct(matrix, x, y);
+      if (rowProduct > maxProduct)
+        maxProduct = rowProduct;
+
+      let columnProduct = getInverseDiagonalFourAdjacentNumbersProduct(matrix, x, y);
+      if (columnProduct > maxProduct)
+        maxProduct = columnProduct;
+    }
+  }
+
+  return maxProduct;
+}
+
+function getDiagonalFourAdjacentNumbersProduct(matrix, x, y) {
+
+  let value = matrix[x][y];
+
+  if (matrix.length > x+1 && matrix.length > y+1)
+    value *= matrix[x+1][y+1];
+
+  if (matrix.length > x+2 && matrix.length > y+2)
+    value *= matrix[x+2][y+2];
+
+  if (matrix.length > x+3 && matrix.length > y+3)
+    value *= matrix[x+3][y+3];
+
+  return value;
+}
+
+function getInverseDiagonalFourAdjacentNumbersProduct(matrix, x, y) {
+
+  let value = matrix[x][y];
+
+  if (matrix.length > x+1 && y-1 >= 0)
+    value *= matrix[x+1][y-1];
+
+  if (matrix.length > x+2 && y-2 >= 0)
+    value *= matrix[x+2][y-2];
+
+  if (matrix.length > x+3 && y-3 >= 0)
+    value *= matrix[x+3][y-3];
+
+  return value;
+}
 
 
 
@@ -125,6 +335,7 @@ if (typeof module !== 'undefined') {
     uniquifyArray,
     doesWordExist,
     howManyTimes,
-    greatestProduct
+    greatestProduct,
+    greatestProductOfDiagonals
   };
 }
