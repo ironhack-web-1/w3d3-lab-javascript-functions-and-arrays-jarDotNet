@@ -273,13 +273,13 @@ function greatestProductOfDiagonals(matrix) {
   for (let x = 0; x < matrix.length; x++) {
     for (let y = 0; y < matrix[0].length; y++) {
 
-      let rowProduct = getDiagonalFourAdjacentNumbersProduct(matrix, x, y);
-      if (rowProduct > maxProduct)
-        maxProduct = rowProduct;
+      let diagonalProduct = getDiagonalFourAdjacentNumbersProduct(matrix, x, y);
+      if (diagonalProduct > maxProduct)
+        maxProduct = diagonalProduct;
 
-      let columnProduct = getInverseDiagonalFourAdjacentNumbersProduct(matrix, x, y);
-      if (columnProduct > maxProduct)
-        maxProduct = columnProduct;
+      let inverseDiagonalProduct = getInverseDiagonalFourAdjacentNumbersProduct(matrix, x, y);
+      if (inverseDiagonalProduct > maxProduct)
+        maxProduct = inverseDiagonalProduct;
     }
   }
 
