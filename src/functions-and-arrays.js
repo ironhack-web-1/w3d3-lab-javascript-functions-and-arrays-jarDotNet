@@ -1,9 +1,6 @@
 // Iteration #1: Find the maximum
 function maxOfTwoNumbers(num1, num2) {
-  if (num1 >= num2) 
-    return num1;
-  else
-    return num2;
+  return Math.max(num1, num2);
 }
 
 
@@ -16,14 +13,7 @@ function findLongestWord(arrayOfWords) {
   if (arrayOfWords === null || arrayOfWords.length === 0)
     return null;
 
-  let longestWord = "";
-
-  arrayOfWords.forEach(word => {
-    if (word.length > longestWord.length)
-      longestWord = word;
-  }); 
-  
-  return longestWord;
+  return arrayOfWords.sort((a , b) => b.length - a.length)[0];
 }
 
 
@@ -33,14 +23,10 @@ const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
 
 function sumNumbers(arrayOfNumbers) {
   
-  let sum = 0;
+  if (arrayOfNumbers === null)
+    return 0;
 
-  if (arrayOfNumbers !== null && arrayOfNumbers.length !== 0)
-  {
-    arrayOfNumbers.forEach(num => sum += num); 
-  }
-  
-  return sum;
+  return arrayOfNumbers.reduce((sum, num) => sum + num, 0);
 }
 
 
@@ -48,12 +34,10 @@ function sumNumbers(arrayOfNumbers) {
 // Iteration #3.1 Bonus: A generic sum() function
 function sum(arrayOfData) {
   
-  if (arrayOfData === null || arrayOfData.length === 0)
+  if (arrayOfData === null)
     return 0;
-    
-  let sum = 0;
 
-  arrayOfData.forEach(data => {
+  const total = arrayOfData.reduce((sum, data) => {
     switch (typeof data) {
       case 'number':
         sum += data;
@@ -70,9 +54,10 @@ function sum(arrayOfData) {
       default:
         throw new Error("Unsupported data type sir or ma'am");
     }
-  }); 
+    return sum;
+  }, 0);
 
-  return sum;
+  return total;
 }
 
 
@@ -100,11 +85,9 @@ function averageWordLength(arrayOfWords) {
   if (arrayOfWords === null || arrayOfWords.length === 0)
     return null;
 
-  let sum = 0;
-
-  arrayOfWords.forEach(word => sum += word.length); 
+  const total = arrayOfWords.reduce((sum, word) => sum + word.length, 0);
   
-  return sum / arrayOfWords.length;
+  return total / arrayOfWords.length;
 }
 
 // Bonus - Iteration #4.1
@@ -138,14 +121,7 @@ function uniquifyArray(arrayOfWords) {
   if (arrayOfWords === null || arrayOfWords.length === 0)
     return null;
 
-  let newArray = [];
-
-  arrayOfWords.forEach(word => {
-    if (!newArray.includes(word))
-      newArray.push(word);
-  }); 
-
-  return newArray;
+  return arrayOfWords.filter((word, pos) => arrayOfWords.indexOf(word) == pos);
 }
 
 
@@ -180,17 +156,10 @@ const wordsCount = [
 
 function howManyTimes(arrayOfWords, wordToSeach) {
 
-  let count = 0;
+  if (arrayOfWords === null)
+    return 0;
 
-  if (arrayOfWords !== null && arrayOfWords.length !== 0)
-  {
-    arrayOfWords.forEach(word => {
-      if (word === wordToSeach)
-        count++;
-    }); 
-  }
-
-  return count;
+  return arrayOfWords.filter(word => word === wordToSeach).length;
 }
 
 
