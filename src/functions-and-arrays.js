@@ -13,7 +13,7 @@ function findLongestWord(arrayOfWords) {
   if (arrayOfWords === null || arrayOfWords.length === 0)
     return null;
 
-  return arrayOfWords.sort((a , b) => b.length - a.length)[0];
+  return arrayOfWords.sort((a, b) => b.length - a.length)[0];
 }
 
 
@@ -77,6 +77,7 @@ function averageNumbers(arrayOfNumbers) {
 }
 
 
+
 // Level 2: Array of strings
 const wordsArr = ['seat', 'correspond', 'linen', 'motif', 'hole', 'smell', 'smart', 'chaos', 'fuel', 'palace'];
 
@@ -90,6 +91,8 @@ function averageWordLength(arrayOfWords) {
   return total / arrayOfWords.length;
 }
 
+
+
 // Bonus - Iteration #4.1
 function avg(arrayOfData) {
 
@@ -100,6 +103,8 @@ function avg(arrayOfData) {
 
   return total / arrayOfData.length;
 }
+
+
 
 // Iteration #5: Unique arrays
 const wordsUnique = [
